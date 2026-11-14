@@ -1,0 +1,15 @@
+# Compiled Java classes & Maven build folders
+**/target/
+*.class
+*.jar
+*.war
+
+# IntelliJ IDEA workspace files
+.idea/
+*.iml
+**/out/
+
+# Protect database credentials & environment variables!
+**/src/main/resources/application.yml
+**/src/main/resources/application-*.yml
+.env
