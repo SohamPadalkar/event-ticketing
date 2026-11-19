@@ -36,4 +36,11 @@ public class EventController {
     public ResponseEntity<EventResponse> getEventById(@PathVariable UUID id) {
         return ResponseEntity.ok(eventService.getEventById(id));
     }
+
+    @PostMapping("/{id}/reserve")
+    public ResponseEntity<EventResponse> reserveSeats(
+            @PathVariable UUID id,
+            @Valid @RequestBody com.ticketing.catalog.dto.ReserveSeatsRequest request) {
+        return ResponseEntity.ok(eventService.reserveSeats(id, request.seats()));
+    }
 }

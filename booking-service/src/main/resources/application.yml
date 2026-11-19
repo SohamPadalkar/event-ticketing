@@ -1,0 +1,32 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: booking-service
+  threads:
+    virtual:
+      enabled: true
+  datasource:
+    url: jdbc:postgresql://db.ysdahdloulwznpdbpmaq.supabase.co:5432/postgres?user=postgres&password=preethaisthebest
+    username: postgres
+    password: ${TicketingPass2026}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 5
+      connection-timeout: 20000
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        default_schema: booking_schema
+        hbm2ddl:
+          create_namespaces: true
+
+# Base URL for synchronous inter-service HTTP calls to Event Catalog Service
+services:
+  catalog:
+    url: http://localhost:8081

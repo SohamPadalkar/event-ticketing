@@ -50,6 +50,23 @@ public class EventService {
         return mapToResponse(event);
     }
 
+    @Transactional
+    public EventResponse reserveSeats(UUID eventId, int seatsToReserve) {
+        Event event = eventRepository.findById(eventId)
+                .orElseThrow(() -> new IllegalArgumentException("Event not found with id: " + eventId));
+
+        if (event.getAvailableSeats() < seatsToReserve) {
+            throw new IllegalStateException("Not enough seats available. Requested: "
+                    + seatsToReserve + ", Available: " + event.getAvailableSeats());
+        }
+
+        event.setAvailableSeats(event.getAvailableSeats() - seatsToReserve);
+
+        // When this @Transactional method exits, Hibernate flushes the UPDATE with WHERE version = ?
+        Event updatedEvent = eventRepository.save(event);
+        return mapToResponse(updatedEvent);
+    }
+
     private EventResponse mapToResponse(Event event) {
         return new EventResponse(
                 event.getId(),
