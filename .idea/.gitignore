@@ -8,3 +8,7 @@
 # Datasource local storage ignored files
 /dataSources/
 /dataSources.local.xml
+**/tickets/
+**/application.yml
+frontend/.next/
+frontend/node_modules/
